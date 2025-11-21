@@ -23,7 +23,7 @@ public class User {
     @Email(message = "Email should be valid")
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Task> tasks = new ArrayList<>();
 

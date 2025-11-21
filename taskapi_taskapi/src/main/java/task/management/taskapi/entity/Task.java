@@ -48,7 +48,7 @@ public class Task {
     @JsonIgnoreProperties({"tasks"})
     private User user;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"task"})
     private List<Comment> comments = new ArrayList<>();
 
