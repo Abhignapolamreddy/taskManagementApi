@@ -15,6 +15,7 @@ import task.management.taskapi.constant.Status;
 import task.management.taskapi.dto.TaskDto;
 import task.management.taskapi.entity.Tag;
 import task.management.taskapi.entity.Task;
+import task.management.taskapi.exception.ResourceNotFoundException;
 import task.management.taskapi.repository.TagRepository;
 import task.management.taskapi.repository.TaskRepository;
 import task.management.taskapi.repository.UserRepository;
@@ -52,7 +53,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Object updateTask(Long id, TaskDto dto) {
-		Task existing = taskRepository.findById(id) .orElseThrow(() -> new RuntimeException("Task not found with id: " + id)); 
+		Task existing = taskRepository.findById(id) .orElseThrow(() -> new ResourceNotFoundException("Task with ID " + id + " not found"));; 
 		existing.setTitle(dto.getTitle()); 
 		existing.setDescription(dto.getDescription()); 
 		existing.setStatus(dto.getStatus()); 
@@ -75,7 +76,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Object getTaskById(Long id) {
-		Task task = taskRepository.findById(id) .orElseThrow(() -> new RuntimeException("Task not found with id: "+ id));
+		Task task = taskRepository.findById(id) .orElseThrow(() -> new ResourceNotFoundException("Task with ID " + id + " not found"));
 		return task;
 	}
 	@Override
@@ -89,7 +90,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public void deleteTask(Long id) {
 		// TODO Auto-generated method stub
-		Task existing = taskRepository.findById(id) .orElseThrow(() -> new RuntimeException("Task not found with id: " + id)); 
+		Task existing = taskRepository.findById(id) .orElseThrow(() -> new ResourceNotFoundException("Task with ID " + id + " not found")); 
 		taskRepository.delete(existing);
 		
 	}
