@@ -3,6 +3,9 @@ package task.management.taskapi.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import task.management.taskapi.constant.Status;
@@ -23,6 +26,8 @@ public class Task {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "Title is required")
+    @Size(max = 255, message = "Title must be less than 255 characters")
     private String title;
 
     @Column(length = 2000)

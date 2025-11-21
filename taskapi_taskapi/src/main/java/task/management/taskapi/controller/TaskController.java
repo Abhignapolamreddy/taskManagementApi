@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import task.management.taskapi.constant.Status;
 import task.management.taskapi.dto.TaskDto;
 import task.management.taskapi.entity.Task;
@@ -24,7 +25,7 @@ private TaskService taskService;
 
 // Create a new task
 @PostMapping
-public ResponseEntity<Object> createTask(@RequestBody TaskDto taskDto) {
+public ResponseEntity<Object> createTask(@Valid @RequestBody TaskDto taskDto) {
     Object createdTask = taskService.createTask(taskDto);
     return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
 }
